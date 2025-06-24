@@ -21,11 +21,15 @@ let num2;
 let operator;
 
 // let function = operate() {//
-const digit = document.getElementById("digit");
+const digits = document.getElementsByClassName("digit");
+console.log(digit);
 // create function to populate display and store variable
 function displayDigit() {
   // document.getElementById("digit").innerText = "test";
-  // console.log("test");
+  console.log("test");
   alert("test");
 }
-digit.addEventListener("click", displayDigit);
+
+for (const digit of digits) {
+  digit.addEventListener("click", displayDigit);
+}
