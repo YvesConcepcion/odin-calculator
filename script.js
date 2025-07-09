@@ -14,7 +14,6 @@ function main() {
   let total;
 
   function add(a, b) {
-    console.log(a + b);
     return a + b;
   }
   function subtract(a, b) {
@@ -34,15 +33,23 @@ function main() {
       num2 = num;
     }
   }
+
   let digits = document.querySelectorAll(".digit");
   let display = document.getElementById("display");
+  let operators = document.querySelectorAll(".operator");
 
   digits.forEach(function (e) {
     e.addEventListener("click", populateDisplay);
   });
 
-  function operate(num1, operator, num2) {}
+  operators.forEach(function (e) {
+    e.addEventListener("click", function () {
+      operator = e.id;
+      console.log(operator);
+    });
+  });
 
+  function operate(num1, operator, num2) {}
   function populateDisplay() {
     let num;
     if (display.textContent === "0") {
@@ -57,5 +64,4 @@ function main() {
     return num;
   }
 }
-
 main();
