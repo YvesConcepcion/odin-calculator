@@ -14,24 +14,11 @@ function main() {
   let activeOperator = false;
   let total;
 
-  function add(a, b) {
-    return a + b;
-  }
-  function subtract(a, b) {
-    return a - b;
-  }
-  function multiply(a, b) {
-    return a * b;
-  }
-  function divide(a, b) {
-    return a / b;
-  }
-
   function storeNum(num) {
     if (currentNum === 1) {
-      num1 = num;
+      return (num1 = num);
     } else {
-      num2 = num;
+      return (num2 = num);
     }
   }
 
@@ -44,7 +31,8 @@ function main() {
   }
   let digits = document.querySelectorAll(".digit");
   let display = document.getElementById("display");
-  let operators = document.querySelectorAll(".operator");
+  const operators = document.querySelectorAll(".operator");
+  const equal = document.getElementById("equal");
 
   digits.forEach(function (e) {
     e.addEventListener("click", populateDisplay);
@@ -58,26 +46,57 @@ function main() {
         switchNum();
         console.log(num1, num2, operator);
         activeOperator = true;
+        return operator;
       }
     });
   });
 
-  function operate(num1, operator, num2) {}
+  function add(a, b) {
+    return a + b;
+  }
+  function subtract(a, b) {
+    return a - b;
+  }
+  function multiply(a, b) {
+    return a * b;
+  }
+  function divide(a, b) {
+    return a / b;
+  }
+
+  function operate(a, b, op) {
+    if (operator === "add") {
+      display.textContent = add(num1, num2);
+    } else if (operator === "subtract") {
+      display.textContent = subtract(num1, num2);
+    } else if (operator === "multiply") {
+      display.textContent = multiply(num1, num2);
+    } else if (operator === "divide") {
+      display.textContent = multiply(num1, num2);
+    }
+  }
+  equal.addEventListener("click", operate);
+
   function populateDisplay() {
-    let num;
     if (activeOperator === true) {
+      display.textContent = this.textContent;
       activeOperator = false;
+      return;
     }
     if (display.textContent === "0") {
       display.textContent = this.textContent;
-      num = Number(display.textContent);
-      storeNum(num);
     } else {
       display.textContent += this.textContent;
-      num = Number(display.textContent);
-      storeNum(num);
     }
-    return num;
+    const currentValue = Number(display.textContent);
+
+    if (currentNum === 1) {
+      num1 = currentValue;
+      storeNum(num1);
+    } else if (currentNum === 2) {
+      num2 = currentValue;
+      storeNum(num2);
+    }
   }
 }
 main();
